@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Parameter Creator</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='styles/GUI.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header-container">
+        <h1>Parameter Creator</h1>
+      </div>
+      <div class="component-container">
+        <div class="component">
+          <label>Select Category : </label>
+          <select id="categorySelection" class="category-selection">
+            <option value="SYSTEM_PARAMETER">System Parameter</option>
+            <option value="SCANNER_DIAGONISTIC">Scanner Diagnostic</option>
+            <option value="SCANNER_STATISTICS">Scanner Statistics</option>
+            <option value="DISCOVERY">Discovery</option>
+            <option value="SCANNER_STATUS">Scanner Status</option>
+            <option value="BATTERY">Battery Diagnostics/Maintenance</option>
+            <option value="DUMMY_PARAMETERS">Dummy parameters</option>
+            <option value="RFID_Control">RFID Control</option>
+            <option value="WHISTLER_RS507">Whistler RS507</option>
+            <option value="RFID_CONTROL">Synapse Parameters</option>
+            <option value="CUSTOMER_FACING">Customer Facing</option>
+          </select>
+        </div>
+        <div class="component">
+          <label>Attribute Number : </label>
+          <input id="attribute_number" disabled="disabled" />
+        </div>
+        <div class="component">
+          <label>Attribute Name : </label>
+          <input id="attributeName" />
+        </div>
+        <div class="component">
+          <label>Attribute Type : </label>
+          <select class="category-selection">
+            <option>a</option>
+            <option>b</option>
+            <option>c</option>
+            <option>d</option>
+          </select>
+        </div>
+        <div class="component">
+          <label>Attribute Permision : </label>
+          <select class="category-selection">
+            <option>a</option>
+            <option>b</option>
+            <option>c</option>
+            <option>d</option>
+          </select>
+        </div>
+        <div class="component">
+          <label>Defalt Value : </label>
+          <input />
+        </div>
+        <div class="attribute-discription">
+          <h3>Attribute Discription :</h3>
+          <input
+            class="input-discription"
+            placeholder="Add a attribute discription here"
+          />
+        </div>
+        <div class="button-container">
+          <button>Reset</button>
+          <button onclick="postData()">Create</button>
+        </div>
+      </div>
+    </div>
+    <script src="{{ url_for('static',filename='js/GUI.js') }}"></script>
+  </body>
+</html>

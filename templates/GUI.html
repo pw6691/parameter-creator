@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Parameter Creator</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='styles/GUI.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header-container">
+        <h1>Parameter Creator</h1>
+      </div>
+      <div class="component-container">
+        <div>
+          <div class="component-path">
+            <label>File location : </label>
+            <input type="text" id="pathInput" placeholder="Enter path" />
+            <div>
+              <button id="get-paths">Verify</button>
+            </div>
+          </div>
+          <hr />
+          <div class="component">
+            <label>Select Category : </label>
+            <select id="categorySelection" class="category-selection">
+              <option value="NOT_SELECTED">Select Parameter Category</option>
+              <option value="SYSTEM_PARAMETER">System Parameter</option>
+              <option value="SCANNER_DIAGONISTIC">Scanner Diagnostic</option>
+              <option value="SCANNER_STATISTICS">Scanner Statistics</option>
+              <option value="DISCOVERY">Discovery</option>
+              <option value="SCANNER_STATUS">Scanner Status</option>
+              <option value="BATTERY">Battery Diagnostics/Maintenance</option>
+              <option value="DUMMY_PARAMETERS">Dummy parameters</option>
+              <option value="RFID_CONTROL">RFID Control</option>
+              <option value="WHISTLER_RS507">Whistler RS507</option>
+              <option value="SYNAPSE_PARAMETER">Synapse Parameters</option>
+              <option value="CUSTOMER_FACING">Customer Facing</option>
+            </select>
+          </div>
+          <div class="component">
+            <label>Attribute Number : </label>
+            <input id="attribute_number" disabled="disabled" required />
+          </div>
+          <div class="component">
+            <label>Attribute Name : </label>
+            <input id="attributeName" oninput="capitalizeInput(this)" />
+          </div>
+          <div class="component">
+            <label>Attribute Type : </label>
+            <div>
+              <select id="attribute-type" class="category-selection">
+                <option value="Select">Select one</option>
+                <!-- ATT_TYPE_Select  -->
+                <option value="ARRAY">ARRAY</option>
+                <!-- ATT_TYPE_ARRAY  -->
+                <option value="BYTE">BYTE</option>
+                <!-- ATT_TYPE_BYTE  -->
+                <option value="CHAR">CHAR</option>
+                <!-- ATT_TYPE_CHAR  -->
+                <option value="DWORD">DWORD</option>
+                <!-- ATT_TYPE_DWORD  -->
+                <option value="FLAG">FLAG</option>
+                <!-- ATT_TYPE_FLAG  -->
+                <option value="INT">INT</option>
+                <!-- ATT_TYPE_INT  -->
+                <option value="LONGINT">LONGINT</option>
+                <!-- ATT_TYPE_LONGINT  -->
+                <option value="STRING">STRING</option>
+                <!-- ATT_TYPE_STRING  -->
+                <option value="WORD">WORD</option>
+                <!-- ATT_TYPE_WORD  -->
+                <option value="ACTION">ACTION</option>
+                <!-- ATT_TYPE_ACTION  -->
+                <option value="NONE">NONE</option>
+                <!-- ATT_TYPE_NONE  -->
+              </select>
+              <label class="size-of-attibute" id="size-of-attibute"
+                >Size
+              </label>
+              <input id="size" width="2%" />
+            </div>
+          </div>
+          <div class="component">
+            <label>Attribute Permision : </label>
+            <select id="permision" class="category-selection">
+              <option value="HIDDEN">HIDDEN</option>
+              <!-- ATT_SM_HIDDEN -->
+              <option value="RO">READ ONLY</option>
+              <!-- ATT_SM_RO -->
+              <option value="RW">READ AND WRITE</option>
+              <!-- ATT_SM_RW -->
+              <option value="PRW">PERSISTANCE, READ, WRITE</option>
+              <!-- ATT_SM_PRW -->
+              <option value="WO">WRITE ONLY</option>
+              <!-- ATT_SM_WO -->
+            </select>
+          </div>
+          <div class="default-functions">
+            <textarea
+              class="default-value"
+              id="Default-value"
+              placeholder="Enter default value"
+            ></textarea>
+            <div class="create-functions">
+              <div style="padding-left: 4%">
+                <button
+                  id="default-zero"
+                  style="width: 92%"
+                  disabled="disabled"
+                >
+                  set default 0
+                </button>
+              </div>
+              <div style="padding-left: 4%">
+                <button id="set-default" style="width: 92%" disabled="disabled">
+                  default 0 _x(v)
+                </button>
+              </div>
+              <div style="width: 96%; margin-bottom: 0px">
+                <input type="checkbox" id="read-function" />
+                <label style="width: 50%; font-size: medium"
+                  >Read Function</label
+                >
+              </div>
+              <div style="width: 96%; margin-bottom: 0px">
+                <input type="checkbox" id="write-function" />
+                <label style="font-size: medium">Write Function</label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="read-write-descriptions">
+              <label>Read Function Description :</label>
+              <textarea id="read-function-description"></textarea>
+            </div>
+            <div class="read-write-descriptions">
+              <label>Write Function Description :</label>
+              <textarea id="write-function-description"></textarea>
+            </div>
+          </div>
+          <div class="parinfo-inputs">
+            <div class="input-values">
+              <span>Select Ownership</span>
+              <select id="ownership">
+                <option value="select_ownership">SELECT OWNERSHIP</option>
+                <option value="HOST_OWNED">HOST OWNED</option>
+                <option value="DEC_OWNED">DEC OWNED</option>
+              </select>
+            </div>
+            <div class="input-values">
+              <span>min value :</span>
+              <input id="min_value" />
+            </div>
+            <div class="input-values">
+              <spam>max value :</spam>
+              <input id="max_value" />
+            </div>
+          </div>
+          <div class="attribute-discription">
+            <textarea
+              class="discription"
+              id="discription"
+              placeholder="Add Parameter description here"
+            ></textarea>
+          </div>
+        </div>
+        <div class="button-container">
+          <button onclick="reset()">Reset</button>
+          <button onclick="postData()">Create</button>
+        </div>
+        <div class="output-logs">
+          <span>Output Logs</span>
+          <hr />
+        </div>
+        <textarea class="output" id="output" readonly></textarea>
+      </div>
+    </div>
+    <script src="{{ url_for('static',filename='js/GUI.js') }}"></script>
+  </body>
+</html>
